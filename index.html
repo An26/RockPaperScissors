@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+  <title>RPS Game</title>
+</head>
+
+<body>
+  <div class="container">
+
+    <h1>Rock Paper Sissors</h1>
+
+    <button type="button" value="Rock" onclick="makeChoice(value);">Rock</button>
+    <button type="button" value="Paper" onclick="makeChoice(value);">Paper</button>
+    <button type="button" value="Sissors" onclick="makeChoice(value);">Sissors</button>
+
+    <h2>Your Choice:</h2>
+    <p id="userChoice"></p>
+
+    <button onclick="play();">Play!</button>
+
+    <h2>Computer Choice:</h2>
+    <p id="compChoice"></p>
+
+    <h2>Result:</h2>
+    <p id="gameResult"></p>
+
+
+  </div>
+  <script>
+    //Challenge: Make a rock paper sissors game that takes input, creates random output, compares if the input and output matches, declares if it's a match and a winner. 
+    //Game idea: https://www.theodinproject.com/lessons/foundations-rock-paper-scissors
+
+    function makeChoice(value) {
+      //sets user choice, but also clears previous selections for new play.
+      document.getElementById("userChoice").innerHTML = value;
+      document.getElementById("compChoice").innerHTML = "";
+      document.getElementById("gameResult").innerHTML = "";
+    }
+
+    function gameChoice() {
+      let choices = ["Rock", "Paper", "Sissors"];
+      let choice = choices[Math.floor(Math.random() * choices.length)];
+      document.getElementById("compChoice").innerHTML = choice;
+      return String(choice);
+    }
+
+    async function play() {
+      let userChoice = String(document.getElementById("userChoice").innerHTML);
+      let cChoice = await gameChoice();
+
+      // How to make this game more efficient? 
+      // switch (userChoice, cChoice) {
+      //   case userChoice === cChoice:
+      //     document.getElementById('gameResult').innerHTML = 'It is a tie. Try again.'
+      //     break;
+      //   case userChoice == "Rock" && cChoice == "Sissors":
+      //     document.getElementById('gameResult').innerHTML = "Rock wins to Sissors! User wins! Hooray"
+      //     break;
+      //   case userChoice == "Rock" && cChoice == "Paper":
+      //     document.getElementById('gameResult').innerHTML = "Rock loses to Paper. Computer wins! MUWHAHAHA!"
+      //     break;
+      //   case userChoice == "Sissors" && cChoice == "Paper":
+      //     document.getElementById('gameResult').innerHTML = "Sissors wins to paper! User wins! Hooray!"
+      //     break;
+      //   case userChoice == "Sissors" && cChoice == "Rock":
+      //     document.getElementById('gameResult').innerHTML = "Sissors loses to paper. Computer wins! MUWHAHAHAH"
+      //     break;
+      //   case userChoice == "Paper" && cChoice == "Rock":
+      //     document.getElementById('gameResult').innerHTML = "Paper wins to Rock! Wrapped up the computer."
+      //     break;
+      //   case userChoice == "Paper" && cChoice == "Sissors":
+      //     document.getElementById('gameResult').innerHTML = "Paper loses to Sissors. Computer cut you up."
+      //     break;
+      //   default:
+      //   //code block
+      // }
+
+      if (userChoice === cChoice) {
+        document.getElementById('gameResult').innerHTML = 'It is a tie. Try again.'
+      } else if (userChoice == "Rock" && cChoice == "Sissors") {
+        document.getElementById('gameResult').innerHTML = "Rock breaks Sissors! User wins! Hooray"
+      } else if (userChoice == "Rock" && cChoice == "Paper") {
+        document.getElementById('gameResult').innerHTML = "Rock gets wrapped up by Paper. Computer wins! MUWHAHAHA!"
+      } else if (userChoice == "Sissors" && cChoice == "Paper") {
+        document.getElementById('gameResult').innerHTML = "Sissors cuts up paper! User wins! Hooray!"
+      } else if (userChoice == "Sissors" && cChoice == "Rock") {
+        document.getElementById('gameResult').innerHTML = "Sissors gets crushed by Rock. Computer wins! MUWHAHAHAH"
+      } else if (userChoice == "Paper" && cChoice == "Rock") {
+        document.getElementById('gameResult').innerHTML = "Paper wraps up Rock! User wins! Hooray!"
+      } else if (userChoice == "Paper" && cChoice == "Sissors") {
+        document.getElementById('gameResult').innerHTML = "Paper gets cut up by Sissors. Computer wins! Muwhaha"
+      }
+    }
+
+  </script>
+</body>
+
+</html>
